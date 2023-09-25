@@ -23,7 +23,7 @@ def player_stats(player_id):
     return player_stats
 
 # print(data.decode("utf-8"))
-def player_jsons():
+def team_data_dict():
     team_dict = {
         "team": "DAL",
         "players": {}
@@ -75,7 +75,6 @@ def player_jsons():
                     "ast": round(assists, 1)
                 }
             team_dict["players"][name] = player_dict
-    team_json = json.dumps(team_dict)
-    return team_json
-        
-
+    # team_json = json.dumps(team_dict)
+    # return team_json
+    return team_dict

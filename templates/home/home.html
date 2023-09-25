@@ -8,6 +8,12 @@
 </head>
 <body>
     <h1>{{description}}</h1>
-    <p>{{player_data}}</p>
+    <div id="table-container"></div>
 </body>
+
+<script type="text/javascript">
+    var team_data = JSON.parse('{{ team_data | safe }}');
+</script>
+
+<script src="/static/js/home/home.js"></script>
 </html>
