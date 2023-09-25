@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, render_template
+from scripts.get import player_jsons
+import scripts.config
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
@@ -7,7 +9,8 @@ def home():
     return render_template(
         '/home/home.html',
         title='mavsfocus',
-        description='Home page for mavsfocus.com'
+        description='Home page for mavsfocus.com',
+        player_data = player_jsons()
     )
 
 @app.route('/roster')

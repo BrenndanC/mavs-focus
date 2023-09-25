@@ -1,4 +1,5 @@
-import http.client, json, time, config
+import http.client, json, time
+from . import config
 
 # Sets connection to correct API
 conn = http.client.HTTPSConnection("api.sportradar.us")
@@ -22,8 +23,14 @@ def player_stats(player_id):
     return player_stats
 
 # print(data.decode("utf-8"))
-for player in team_data['players']:
-        print(player['full_name'])
+def player_jsons():
+    team_dict = {
+        "team": "DAL",
+        "players": {}
+    }
+    for player in team_data['players']:
+        name = player['full_name']
+        player_dict = {}
         time.sleep(1)
         stats = player_stats(player['id'])
         for season in stats['seasons']:
@@ -36,6 +43,12 @@ for player in team_data['players']:
                 points = averages['points']
                 rebounds = averages['rebounds']
                 assists = averages['assists']
+                player_dict[year] = {
+                    "team": alias,
+                    "pts": round(points, 1),
+                    "reb": round(rebounds, 1),
+                    "ast": round(assists, 1)
+                }
             # Handles the case where the player has played on multiple teams that season
             else:
                 alias = ""
@@ -55,9 +68,14 @@ for player in team_data['players']:
                 points = totPts/totGames
                 rebounds = totReb/totGames
                 assists = totReb/totGames
-            print("     " + str(year) + " [" + alias + "]:")
-            print("          " + str(points), "PPG")
-            print("          " + str(rebounds), "REB")
-            print("          " + str(assists), "AST")
+                player_dict[year] = {
+                    "team": alias,
+                    "pts": round(points, 1),
+                    "reb": round(rebounds, 1),
+                    "ast": round(assists, 1)
+                }
+            team_dict["players"][name] = player_dict
+    team_json = json.dumps(team_dict)
+    return team_json
         
 
