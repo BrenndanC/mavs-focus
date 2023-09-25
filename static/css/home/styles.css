@@ -9,12 +9,14 @@ h1 {
   margin-top: 20px;
 }
 
-button {
-  padding: 5px 10px;
-  font-size: 16px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
+.table-container {
+  text-align: center;
+}
+
+.table-container table {
+  margin: auto;
+}
+
+.table-container table td {
+  padding: 10px;
 }
